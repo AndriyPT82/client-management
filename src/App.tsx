@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import i18n from 'i18next';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+import { useTranslation } from 'react-i18next';
+
+
 function App() {
-  const [count, setCount] = useState(0)
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -16,14 +20,11 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React {t('messages.welcome')}</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button disabled={i18n.language === 'uk'} onClick={() => { i18n.changeLanguage('uk') }}>{t("language.uk")}</button>
+        <button disabled={i18n.language === 'pt'} onClick={() => { i18n.changeLanguage('pt') }}>{t("language.pt")}</button>
+        <button disabled={i18n.language === 'en'} onClick={() => { i18n.changeLanguage('en') }}>{t("language.en")}</button>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
